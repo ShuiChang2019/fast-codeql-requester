@@ -1,0 +1,67 @@
+{
+  "name": "fast-codeql-requester",
+  "displayName": "Fast CodeQL Requster",
+  "description": "An easy-to-configure, user-friendly CodeQL invoker for quickly sending selected code to the CodeQL Server.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.91.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.sendPostRequest"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.sendToCodeQLDocker",
+        "title": "sendToCodeQLDocker"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.sendToCodeQLDocker",
+          "when": "editorHasSelection",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "CodeQL Server Configuration",
+      "properties": {
+        "CodeQL_Server_API.uri":{
+          "type": "string",
+          "default": "",
+          "description": "The URI to CodeQL Server API"
+        }
+      }
+    }
+  },
+  
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.91.0",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.11.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "axios": "^1.7.2"
+  }
+}
